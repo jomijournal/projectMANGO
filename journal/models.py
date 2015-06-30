@@ -66,7 +66,10 @@ class Article(models.Model):
     volume = models.IntegerField(default = 2014)
     
     issue = models.IntegerField(default = 0)
-                                   
+    
+    videoURL = models.CharField(max_length = 128, default = '')
+    
+    
     
     
     def __str__(self):
