@@ -30,10 +30,13 @@ class Article(models.Model):
     
     comments = models.TextField(help_text = 'Store the comments in XML')
     
+    annotations = models.TextField(help_text = 'Stores annotations for viewing by the author ' +
+                                   'and editorial team in XML', default = '')
+    
     publicationDate = models.DateTimeField(help_text = 'The time of publication')
     
     revisions = models.TextField(help_text = 'Store the author, publication time,' +
-                                 'and filename for each change in XML')
+                                 'and filWename for each change in XML')
     
     PUBLICATION_STATUSES = (
         (0, 'published'),
@@ -57,9 +60,23 @@ class Article(models.Model):
                                   help_text = 'Subject of articles')
     
     tags = models.CharField(max_length = 256)
+
+    articleID = models.IntegerField(default = 0)
+    
+    volume = models.IntegerField(default = 2014)
+    
+    issue = models.IntegerField(default = 0)
+                                   
     
     
     def __str__(self):
         return 'Article: ' + self.title
     
-    
+    class Meta:
+        permissions = (
+            ('can_publish', 'can publish artcles, reserved for editorial staff'),
+            ('can_annotate', 'can annotate any article'),
+            ('can_view_production', 'can view articles in production'),
+            ('can_annotate_own', 'can annotate own article (for authors)'),
+            ('can_view_own', 'can view own article (for authors)'),
+        )
