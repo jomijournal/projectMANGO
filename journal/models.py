@@ -1,5 +1,7 @@
 from django.db import models
 
+from ..core import Institution, Author, User
+
 class Article(models.Model):
     # example format for authorsXML
     # <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
@@ -12,12 +14,46 @@ class Article(models.Model):
     
     institution = models.ForeignKey(Institution)
     
-    abstract = models.TextField()
+    abstract = models.TextField(help_text = 'The abstract, in HTML format')
     
-    mainText = models.TextField()
+    mainText = models.TextField(help_text = 'The main text, in a uniform and' +
+                                'easily parsed HTML format')
     
-    procedure = models.TextField()
+    procedure = models.TextField(help_text = 'The procedure, in a uniform and' +
+                                 'easily parsed HTML format')
     
     videoContents = models.TextField(help_text = 'Store the labels and times' +
                                      'for each section in the video')
+    
+    comments = models.TextField(help_text = 'Store the comments in XML')
+    
+    publicationDate = models.DateTimeField(help_text = 'The time of publication')
+    
+    revisions = models.TextField(help_text = 'Store the author, publication time,' +
+                                 'and filename for each change in XML')
+    
+    PUBLICATION_STATUSES = (
+        (0, 'published'),
+        (1, 'preprint'),
+        (2, 'in production'),
+        (3, 'coming soon')
+    )
+    publicationStatus = models.IntegerField(choices = PUBLICATION_STATUSES, default = 0,
+                                            help_text = 'Status of publication')
+    
+    SUBJECTS = (
+        (0, 'General Surgery'),
+        (1, 'Fundamentals'),
+        (2, 'Orthopedics'),
+        (3, 'Orthopedic Trauma'),
+        (4, 'Vascular Surgery'),
+        (5, 'Ophthalmalogy'),
+        (6, 'Neurosurgery')
+    )
+    subject = models.IntegerField(choices = SUBJECTS, default = 0,
+                                  help_text = 'Subject of articles')
+    
+    tags = models.CharField(max_length = 256)
+    
+    
     
