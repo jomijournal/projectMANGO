@@ -77,14 +77,7 @@ WSGI_APPLICATION = 'projectMANGO.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE':   'django.db.backends.postgresql_psycopg2',
-        'NAME':     'jomi',
-        'USER':     config.DB['USER'],
-        'PASSWORD': config.DB['PASSWORD'],
-        'HOST':     config.DB['HOST'],
-        'PORT':     config.DB['PORT']
-    }
+    'default': config.DATABASE
 }
 
 
