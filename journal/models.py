@@ -1,10 +1,10 @@
 from django.db import models
 
-from ..core import Institution, Author, User
+from core.models import Institution, Author, User
 
 class Article(models.Model):
     
-    title = models.CharField(max_length = 256, help_text 'Title of the article')
+    title = models.CharField(max_length = 256, help_text = 'Title of the article')
     
     # example format for authorsXML
     # <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
