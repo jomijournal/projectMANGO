@@ -3,6 +3,9 @@ from django.db import models
 from ..core import Institution, Author, User
 
 class Article(models.Model):
+    
+    title = models.CharField(max_length = 256, help_text 'Title of the article')
+    
     # example format for authorsXML
     # <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
     # <author>
@@ -55,5 +58,8 @@ class Article(models.Model):
     
     tags = models.CharField(max_length = 256)
     
+    
+    def __str__(self):
+        return 'Article: ' + self.title
     
     
